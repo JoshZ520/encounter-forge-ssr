@@ -1,0 +1,178 @@
+openapi: 3.0.3
+info:
+  title: Encounter Forge SSR Contract
+  version: 0.1.0
+  description: |
+    HTTP contract for server-side rendered Encounter Forge MVP routes.
+    Responses primarily render HTML or redirect after form submissions.
+servers:
+  - url: http://localhost:5000
+paths:
+  /encounters:
+    get:
+      summary: Render encounter list page
+      operationId: renderEncounterList
+      responses:
+        "200":
+          description: HTML page with encounter summaries and status banners
+          content:
+            text/html:
+              schema:
+                type: string
+  /encounters/create:
+    get:
+      summary: Render create encounter form
+      operationId: renderCreateEncounterForm
+      responses:
+        "200":
+          description: HTML page with blank form
+          content:
+            text/html:
+              schema:
+                type: string
+    post:
+      summary: Submit create encounter form
+      operationId: createEncounter
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/EncounterForm"
+      responses:
+        "303":
+          description: Redirect to details or list after successful create
+        "400":
+          description: Re-render create form with validation errors
+          content:
+            text/html:
+              schema:
+                type: string
+  /encounters/{id}:
+    get:
+      summary: Render encounter details page
+      operationId: renderEncounterDetails
+      parameters:
+        - $ref: "#/components/parameters/EncounterId"
+      responses:
+        "200":
+          description: HTML details page
+          content:
+            text/html:
+              schema:
+                type: string
+        "303":
+          description: Redirect to list with error banner if encounter missing
+  /encounters/{id}/edit:
+    get:
+      summary: Render edit encounter form
+      operationId: renderEditEncounterForm
+      parameters:
+        - $ref: "#/components/parameters/EncounterId"
+      responses:
+        "200":
+          description: HTML edit page
+          content:
+            text/html:
+              schema:
+                type: string
+        "303":
+          description: Redirect to list with error banner if encounter missing
+    post:
+      summary: Submit edit encounter form
+      operationId: updateEncounter
+      parameters:
+        - $ref: "#/components/parameters/EncounterId"
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/EncounterForm"
+      responses:
+        "303":
+          description: Redirect to details/list after successful update
+        "400":
+          description: Re-render edit form with validation errors
+          content:
+            text/html:
+              schema:
+                type: string
+  /encounters/{id}/delete:
+    post:
+      summary: Delete encounter
+      operationId: deleteEncounter
+      parameters:
+        - $ref: "#/components/parameters/EncounterId"
+      responses:
+        "303":
+          description: Redirect to list with success or not-found banner
+
+components:
+  parameters:
+    EncounterId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+  schemas:
+    EncounterForm:
+      type: object
+      required:
+        - name
+        - partyLevel
+        - partySize
+        - environment
+        - difficulty
+        - monsters
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 120
+        partyLevel:
+          type: integer
+          minimum: 1
+          maximum: 20
+        partySize:
+          type: integer
+          minimum: 1
+          maximum: 10
+        environment:
+          type: string
+          minLength: 1
+          maxLength: 60
+        difficulty:
+          type: string
+          enum: [Easy, Medium, Hard, Deadly]
+        notes:
+          type: string
+          maxLength: 4000
+        monsters:
+          type: array
+          minItems: 1
+          items:
+            $ref: "#/components/schemas/MonsterEntryForm"
+    MonsterEntryForm:
+      type: object
+      required:
+        - name
+        - quantity
+        - challengeRating
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 120
+        quantity:
+          type: integer
+          minimum: 1
+        challengeRating:
+          type: string
+          pattern: "^(1/8|1/4|1/2|[1-9][0-9]*)$"
+          description: D&D CR format accepted in MVP
+        notes:
+          type: string
+          maxLength: 2000
