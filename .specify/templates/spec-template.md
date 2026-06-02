@@ -104,7 +104,8 @@
 
 <!--
   ACTION REQUIRED: Define measurable success criteria.
-  These must be technology-agnostic and measurable.
+  These must be technology-agnostic and measurable. For user-facing work, include at least one criterion that
+  captures experience consistency or usability, and add a performance target when responsiveness matters.
 -->
 
 ### Measurable Outcomes

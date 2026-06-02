@@ -17,6 +17,8 @@ description: "Task list template for feature implementation"
 - **[P]**: Can run in parallel (different files, no dependencies)
 - **[Story]**: Which user story this task belongs to (e.g., US1, US2, US3)
 - Include exact file paths in descriptions
+- Add explicit validation tasks for tests, UX consistency checks, and performance checks whenever the feature
+  changes user-facing behavior or has measurable runtime constraints.
 
 ## Path Conventions
 
