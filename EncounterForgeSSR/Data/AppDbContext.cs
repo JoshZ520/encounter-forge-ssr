@@ -14,6 +14,10 @@ public class AppDbContext : DbContext
 
     public DbSet<MonsterEntry> MonsterEntries => Set<MonsterEntry>();
 
+    public DbSet<MonsterCatalog> MonsterCatalogs => Set<MonsterCatalog>();
+
+    public DbSet<AppUser> AppUsers => Set<AppUser>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -23,5 +27,10 @@ public class AppDbContext : DbContext
             .WithOne(m => m.Encounter)
             .HasForeignKey(m => m.EncounterId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<AppUser>()
+            .HasIndex(user => user.UserName)
+            .IsUnique();
+
     }
 }

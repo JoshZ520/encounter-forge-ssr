@@ -1,11 +1,14 @@
 using EncounterForgeSSR.Data;
 using EncounterForgeSSR.Models;
 using EncounterForgeSSR.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace EncounterForgeSSR.Controllers;
 
+[Authorize]
 public class EncountersController : Controller
 {
     private readonly AppDbContext _context;
@@ -26,6 +29,7 @@ public class EncountersController : Controller
 
     public IActionResult Create()
     {
+        PopulateMonsterCatalogOptions();
         return View(new EncounterFormViewModel());
     }
 
@@ -33,18 +37,18 @@ public class EncountersController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(EncounterFormViewModel form)
     {
+        await HydrateCatalogMonsterDataAsync(form.MonsterEntries);
+
         if (form.MonsterEntries.Count == 0)
         {
             ModelState.AddModelError(nameof(form.MonsterEntries), "Add at least one monster.");
         }
 
-        if (form.MonsterEntries.Any(monster => string.IsNullOrWhiteSpace(monster.Name)))
-        {
-            ModelState.AddModelError(nameof(form.MonsterEntries), "Monster name is required.");
-        }
+        ValidateCustomMonsterFields(form.MonsterEntries);
 
         if (!ModelState.IsValid)
         {
+            PopulateMonsterCatalogOptions();
             return View(form);
         }
 
@@ -70,6 +74,7 @@ public class EncountersController : Controller
             return RedirectToAction(nameof(Index));
         }
 
+        PopulateMonsterCatalogOptions();
         return View(BuildFormFromEncounter(encounter));
     }
 
@@ -83,18 +88,18 @@ public class EncountersController : Controller
             return RedirectToAction(nameof(Index));
         }
 
+        await HydrateCatalogMonsterDataAsync(form.MonsterEntries);
+
         if (form.MonsterEntries.Count == 0)
         {
             ModelState.AddModelError(nameof(form.MonsterEntries), "Add at least one monster.");
         }
 
-        if (form.MonsterEntries.Any(monster => string.IsNullOrWhiteSpace(monster.Name)))
-        {
-            ModelState.AddModelError(nameof(form.MonsterEntries), "Monster name is required.");
-        }
+        ValidateCustomMonsterFields(form.MonsterEntries);
 
         if (!ModelState.IsValid)
         {
+            PopulateMonsterCatalogOptions();
             return View(form);
         }
 
@@ -120,6 +125,7 @@ public class EncountersController : Controller
         encounter.MonsterEntries = form.MonsterEntries
             .Select((monster, index) => new MonsterEntry
             {
+                MonsterCatalogId = monster.MonsterCatalogId,
                 Name = monster.Name,
                 Quantity = monster.Quantity,
                 ChallengeRating = monster.ChallengeRating,
@@ -183,6 +189,7 @@ public class EncountersController : Controller
             MonsterEntries = form.MonsterEntries
                 .Select((monster, index) => new MonsterEntry
                 {
+                    MonsterCatalogId = monster.MonsterCatalogId,
                     Name = monster.Name,
                     Quantity = monster.Quantity,
                     ChallengeRating = monster.ChallengeRating,
@@ -210,6 +217,7 @@ public class EncountersController : Controller
                 {
                     Id = monster.Id,
                     EncounterId = monster.EncounterId,
+                    MonsterCatalogId = monster.MonsterCatalogId,
                     Name = monster.Name,
                     Quantity = monster.Quantity,
                     ChallengeRating = monster.ChallengeRating,
@@ -218,5 +226,78 @@ public class EncountersController : Controller
                 })
                 .ToList()
         };
+    }
+
+    private void PopulateMonsterCatalogOptions()
+    {
+        ViewBag.MonsterCatalog = _context.MonsterCatalogs
+            .OrderBy(monster => monster.Name)
+            .Select(monster => new SelectListItem
+            {
+                Value = monster.Id.ToString(),
+                Text = $"{monster.Name} (CR {monster.ChallengeRating})"
+            })
+            .ToList();
+    }
+
+    private async Task HydrateCatalogMonsterDataAsync(List<MonsterEntry> monsterEntries)
+    {
+        var selectedIds = monsterEntries
+            .Where(monster => monster.MonsterCatalogId.HasValue)
+            .Select(monster => monster.MonsterCatalogId!.Value)
+            .Distinct()
+            .ToList();
+
+        if (selectedIds.Count == 0)
+        {
+            return;
+        }
+
+        var lookup = await _context.MonsterCatalogs
+            .Where(monster => selectedIds.Contains(monster.Id))
+            .ToDictionaryAsync(monster => monster.Id);
+
+        foreach (var monster in monsterEntries)
+        {
+            if (!monster.MonsterCatalogId.HasValue)
+            {
+                continue;
+            }
+
+            if (!lookup.TryGetValue(monster.MonsterCatalogId.Value, out var catalogMonster))
+            {
+                ModelState.AddModelError(nameof(monster.MonsterCatalogId), "Selected catalog monster no longer exists.");
+                continue;
+            }
+
+            monster.Name = catalogMonster.Name;
+            monster.ChallengeRating = catalogMonster.ChallengeRating;
+
+            if (string.IsNullOrWhiteSpace(monster.Notes) && !string.IsNullOrWhiteSpace(catalogMonster.SuggestedNotes))
+            {
+                monster.Notes = catalogMonster.SuggestedNotes;
+            }
+        }
+    }
+
+    private void ValidateCustomMonsterFields(List<MonsterEntry> monsterEntries)
+    {
+        var hasCustomMissingName = monsterEntries.Any(monster =>
+            !monster.MonsterCatalogId.HasValue && string.IsNullOrWhiteSpace(monster.Name));
+
+        if (hasCustomMissingName)
+        {
+            ModelState.AddModelError(nameof(EncounterFormViewModel.MonsterEntries),
+                "Monster name is required for custom monsters.");
+        }
+
+        var hasCustomMissingCr = monsterEntries.Any(monster =>
+            !monster.MonsterCatalogId.HasValue && string.IsNullOrWhiteSpace(monster.ChallengeRating));
+
+        if (hasCustomMissingCr)
+        {
+            ModelState.AddModelError(nameof(EncounterFormViewModel.MonsterEntries),
+                "Challenge rating is required for custom monsters.");
+        }
     }
 }

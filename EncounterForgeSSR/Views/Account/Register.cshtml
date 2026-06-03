@@ -1,0 +1,49 @@
+@model RegisterViewModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="page-shell">
+    <section class="form-shell">
+        <div class="page-header">
+            <div>
+                <p class="section-eyebrow mb-0">New Account</p>
+                <h1 class="page-title">Create your planner login.</h1>
+                <p class="page-intro">Register once to protect encounter management behind authentication.</p>
+            </div>
+        </div>
+
+        <form asp-action="Register" method="post" class="forge-form">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <section class="form-section">
+                <div class="mb-3">
+                    <label asp-for="UserName" class="form-label"></label>
+                    <input asp-for="UserName" class="form-control" autocomplete="username" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label"></label>
+                    <input asp-for="Password" class="form-control" autocomplete="new-password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="mb-0">
+                    <label asp-for="ConfirmPassword" class="form-label"></label>
+                    <input asp-for="ConfirmPassword" class="form-control" autocomplete="new-password" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+            </section>
+
+            <div class="form-actions">
+                <button type="submit" class="app-btn app-btn--accent">Register</button>
+                <a class="app-btn app-btn--ghost" asp-action="Login">Back to Sign In</a>
+            </div>
+        </form>
+    </section>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

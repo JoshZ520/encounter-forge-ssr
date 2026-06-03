@@ -13,6 +13,33 @@ public partial class AppDbContextModelSnapshot : ModelSnapshot
     {
         modelBuilder.HasAnnotation("ProductVersion", "10.0.0");
 
+        modelBuilder.Entity("EncounterForgeSSR.Models.AppUser", b =>
+        {
+            b.Property<int>("Id")
+                .ValueGeneratedOnAdd()
+                .HasColumnType("INTEGER");
+
+            b.Property<DateTime>("CreatedAtUtc")
+                .HasColumnType("TEXT");
+
+            b.Property<string>("PasswordHash")
+                .IsRequired()
+                .HasMaxLength(200)
+                .HasColumnType("TEXT");
+
+            b.Property<string>("UserName")
+                .IsRequired()
+                .HasMaxLength(40)
+                .HasColumnType("TEXT");
+
+            b.HasKey("Id");
+
+            b.HasIndex("UserName")
+                .IsUnique();
+
+            b.ToTable("AppUsers");
+        });
+
         modelBuilder.Entity("EncounterForgeSSR.Models.Encounter", b =>
         {
             b.Property<int>("Id")
@@ -51,7 +78,37 @@ public partial class AppDbContextModelSnapshot : ModelSnapshot
                 .HasColumnType("TEXT");
 
             b.HasKey("Id");
+
             b.ToTable("Encounters");
+        });
+
+        modelBuilder.Entity("EncounterForgeSSR.Models.MonsterCatalog", b =>
+        {
+            b.Property<int>("Id")
+                .ValueGeneratedOnAdd()
+                .HasColumnType("INTEGER");
+
+            b.Property<string>("ChallengeRating")
+                .IsRequired()
+                .HasColumnType("TEXT");
+
+            b.Property<string>("MonsterType")
+                .IsRequired()
+                .HasMaxLength(50)
+                .HasColumnType("TEXT");
+
+            b.Property<string>("Name")
+                .IsRequired()
+                .HasMaxLength(120)
+                .HasColumnType("TEXT");
+
+            b.Property<string>("SuggestedNotes")
+                .HasMaxLength(500)
+                .HasColumnType("TEXT");
+
+            b.HasKey("Id");
+
+            b.ToTable("MonsterCatalogs");
         });
 
         modelBuilder.Entity("EncounterForgeSSR.Models.MonsterEntry", b =>
@@ -65,6 +122,9 @@ public partial class AppDbContextModelSnapshot : ModelSnapshot
                 .HasColumnType("TEXT");
 
             b.Property<int>("EncounterId")
+                .HasColumnType("INTEGER");
+
+            b.Property<int?>("MonsterCatalogId")
                 .HasColumnType("INTEGER");
 
             b.Property<string>("Name")
@@ -83,7 +143,11 @@ public partial class AppDbContextModelSnapshot : ModelSnapshot
                 .HasColumnType("INTEGER");
 
             b.HasKey("Id");
+
             b.HasIndex("EncounterId");
+
+            b.HasIndex("MonsterCatalogId");
+
             b.ToTable("MonsterEntries");
         });
 

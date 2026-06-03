@@ -4,86 +4,161 @@
     ViewData["Title"] = "Create Encounter";
 }
 
-<h1 class="h3 mb-3">Create Encounter</h1>
-
-<form asp-action="Create" method="post">
-    @Html.AntiForgeryToken()
-    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-
-    <div class="mb-3">
-        <label asp-for="Name" class="form-label"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
-
-    <div class="row g-3">
-        <div class="col-md-6 mb-3">
-            <label asp-for="PartyLevel" class="form-label"></label>
-            <input asp-for="PartyLevel" class="form-control" />
-            <span asp-validation-for="PartyLevel" class="text-danger"></span>
-        </div>
-        <div class="col-md-6 mb-3">
-            <label asp-for="PartySize" class="form-label"></label>
-            <input asp-for="PartySize" class="form-control" />
-            <span asp-validation-for="PartySize" class="text-danger"></span>
-        </div>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Environment" class="form-label"></label>
-        <input asp-for="Environment" class="form-control" />
-        <span asp-validation-for="Environment" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Difficulty" class="form-label"></label>
-        <select asp-for="Difficulty" class="form-select">
-            <option value="">Select difficulty</option>
-            <option>Easy</option>
-            <option>Medium</option>
-            <option>Hard</option>
-            <option>Deadly</option>
-        </select>
-        <span asp-validation-for="Difficulty" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Notes" class="form-label"></label>
-        <textarea asp-for="Notes" class="form-control" rows="3"></textarea>
-        <span asp-validation-for="Notes" class="text-danger"></span>
-    </div>
-
-    <fieldset class="border rounded p-3 mb-3">
-        <legend class="float-none w-auto px-2 h6">Monster 1</legend>
-        <div class="mb-3">
-            <label asp-for="MonsterEntries[0].Name" class="form-label">Monster Name</label>
-            <input asp-for="MonsterEntries[0].Name" class="form-control" />
-            <span asp-validation-for="MonsterEntries[0].Name" class="text-danger"></span>
-        </div>
-        <div class="row g-3">
-            <div class="col-md-6 mb-3">
-                <label asp-for="MonsterEntries[0].Quantity" class="form-label"></label>
-                <input asp-for="MonsterEntries[0].Quantity" class="form-control" />
-                <span asp-validation-for="MonsterEntries[0].Quantity" class="text-danger"></span>
-            </div>
-            <div class="col-md-6 mb-3">
-                <label asp-for="MonsterEntries[0].ChallengeRating" class="form-label"></label>
-                <input asp-for="MonsterEntries[0].ChallengeRating" class="form-control" />
-                <span asp-validation-for="MonsterEntries[0].ChallengeRating" class="text-danger"></span>
+<section class="form-shell">
+    <div class="page-header">
+        <div>
+            <p class="section-eyebrow mb-0">New Battle Plan</p>
+            <h1 class="page-title">Draft an encounter that is easy to run mid-session.</h1>
+            <p class="page-intro">Capture the essentials first: party strength, battlefield context, monster lineup, and
+                any tactical reminders you want in front of you when combat starts.</p>
             </div>
         </div>
-        <div class="mb-3">
-            <label asp-for="MonsterEntries[0].Notes" class="form-label"></label>
-            <textarea asp-for="MonsterEntries[0].Notes" class="form-control" rows="2"></textarea>
-            <span asp-validation-for="MonsterEntries[0].Notes" class="text-danger"></span>
-        </div>
-    </fieldset>
 
-    <button type="submit" class="btn btn-primary">Save Encounter</button>
-    <a class="btn btn-secondary" asp-action="Index">Cancel</a>
-</form>
+        <form asp-action="Create" method="post">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+            <section class="form-section">
+                <div class="form-section__header">
+                    <h2 class="form-section__title">Encounter Basics</h2>
+                    <p class="form-hint mb-0">Name the scene and describe the overall pressure you want the party to feel.
+                    </p>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label"></label>
+                    <input asp-for="Name" class="form-control" placeholder="Goblin bridge ambush" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Environment" class="form-label"></label>
+                    <input asp-for="Environment" class="form-control"
+                           placeholder="Forest trail, ruined watchtower, flooded crypt..." />
+                    <span asp-validation-for="Environment" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Difficulty" class="form-label"></label>
+                    <select asp-for="Difficulty" class="form-select">
+                        <option value="">Select difficulty</option>
+                        <option>Easy</option>
+                        <option>Medium</option>
+                        <option>Hard</option>
+                        <option>Deadly</option>
+                    </select>
+                    <span asp-validation-for="Difficulty" class="text-danger"></span>
+                </div>
+
+                <div class="mb-0">
+                    <label asp-for="Notes" class="form-label"></label>
+                    <textarea asp-for="Notes" class="form-control" rows="3"
+                              placeholder="Tactics, hazards, story cues, reinforcements, or reminders for yourself."></textarea>
+                    <span asp-validation-for="Notes" class="text-danger"></span>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <div class="form-section__header">
+                    <h2 class="form-section__title">Party Snapshot</h2>
+                    <p class="form-hint mb-0">These numbers make the roster easier to scan later and help you compare
+                        encounters quickly.</p>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="PartyLevel" class="form-label"></label>
+                            <input asp-for="PartyLevel" class="form-control" />
+                            <span asp-validation-for="PartyLevel" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="PartySize" class="form-label"></label>
+                            <input asp-for="PartySize" class="form-control" />
+                            <span asp-validation-for="PartySize" class="text-danger"></span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="form-section">
+                    <div class="form-section__header">
+                        <h2 class="form-section__title">Monster Lineup</h2>
+                        <p class="form-hint mb-0">Start with one monster block. You can adjust the lineup later if the encounter
+                            needs more pressure or a different rhythm.</p>
+                        </div>
+
+                        <fieldset class="form-section mb-0">
+                            <legend class="float-none w-auto px-0 h6 mb-3">Monster 1</legend>
+                            <div class="mb-3">
+                                <label asp-for="MonsterEntries[0].MonsterCatalogId" class="form-label">Monster Catalog</label>
+                                <select asp-for="MonsterEntries[0].MonsterCatalogId" class="form-select" asp-items="ViewBag.MonsterCatalog">
+                                    <option value="">Custom monster...</option>
+                                </select>
+                                <p class="form-hint mb-0">Choose from catalog to auto-fill name and CR on save.</p>
+                            </div>
+                            <div class="mb-3 custom-only custom-name-field">
+                                <label asp-for="MonsterEntries[0].Name" class="form-label">Monster Name</label>
+                                <input asp-for="MonsterEntries[0].Name" class="form-control"
+                                       placeholder="Goblin, Ogre, Cult Fanatic..." />
+                                <span asp-validation-for="MonsterEntries[0].Name" class="text-danger"></span>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="MonsterEntries[0].Quantity" class="form-label"></label>
+                                    <input asp-for="MonsterEntries[0].Quantity" class="form-control" />
+                                    <span asp-validation-for="MonsterEntries[0].Quantity" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6 mb-3 custom-only custom-cr-field">
+                                    <label asp-for="MonsterEntries[0].ChallengeRating" class="form-label"></label>
+                                    <input asp-for="MonsterEntries[0].ChallengeRating" class="form-control"
+                                           placeholder="1/4, 2, 5..." />
+                                    <span asp-validation-for="MonsterEntries[0].ChallengeRating" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="mb-0">
+                                <label asp-for="MonsterEntries[0].Notes" class="form-label"></label>
+                                <textarea asp-for="MonsterEntries[0].Notes" class="form-control" rows="2"
+                                          placeholder="Behavior, positioning, spells prepared, morale triggers..."></textarea>
+                                <span asp-validation-for="MonsterEntries[0].Notes" class="text-danger"></span>
+                            </div>
+                        </fieldset>
+                    </section>
+
+                    <div class="form-actions mt-4">
+                        <p class="support-copy mb-0">Once saved, you can reopen the encounter to refine details before the session.
+                        </p>
+                        <div class="d-flex flex-wrap gap-2">
+                            <button type="submit" class="app-btn app-btn--accent">Save Encounter</button>
+                            <a class="app-btn app-btn--ghost" asp-action="Index">Cancel</a>
+                        </div>
+                    </div>
+                </form>
+            </section>
+
+            @section Scripts {
+                <partial name="_ValidationScriptsPartial" />
+                <script>
+                    (() => {
+                        const wireMonsterRow = (catalogSelect) => {
+                            const fieldset = catalogSelect.closest('fieldset');
+                            if (!fieldset) {
+                                return;
+                            }
+
+                            const customFields = fieldset.querySelectorAll('.custom-only');
+
+                            const syncVisibility = () => {
+                                const isCustom = !catalogSelect.value;
+                                customFields.forEach(field => {
+                                    field.style.display = isCustom ? '' : 'none';
+                                });
+                            };
+
+                            catalogSelect.addEventListener('change', syncVisibility);
+                            syncVisibility();
+                        };
+
+                        document.querySelectorAll('select[name$=".MonsterCatalogId"]').forEach(wireMonsterRow);
+                    })();
+                </script>
+            }
 

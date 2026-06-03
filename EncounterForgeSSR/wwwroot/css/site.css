@@ -1,31 +1,417 @@
+:root {
+  --forge-bg: #f3ede2;
+  --forge-surface: rgba(255, 250, 242, 0.84);
+  --forge-card: #fffaf2;
+  --forge-ink: #201814;
+  --forge-muted: #6d6259;
+  --forge-line: rgba(82, 57, 40, 0.14);
+  --forge-accent: #a6472a;
+  --forge-accent-dark: #7d321c;
+  --forge-highlight: #e4bf79;
+  --forge-warning: #faefd5;
+  --forge-success: #e8f2e2;
+  --forge-shadow: 0 18px 45px rgba(45, 28, 14, 0.12);
+  --forge-radius: 24px;
+  --forge-radius-sm: 16px;
+}
+
 html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
+  font-size: 16px;
   min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+  min-height: 100vh;
+  margin: 0;
+  color: var(--forge-ink);
+  background:
+    radial-gradient(circle at top left, rgba(228, 191, 121, 0.28), transparent 26%),
+    radial-gradient(circle at bottom right, rgba(166, 71, 42, 0.18), transparent 24%),
+    linear-gradient(180deg, #f8f3ea 0%, var(--forge-bg) 100%);
+  font-family: Georgia, "Times New Roman", serif;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+a {
+  color: var(--forge-accent-dark);
+  text-decoration: none;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+a:hover {
+  color: var(--forge-accent);
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.page-frame {
+  width: min(1100px, calc(100% - 2rem));
+  margin: 0 auto;
+}
+
+.site-header {
+  padding: 1rem 0 2rem;
+}
+
+.site-nav {
+  margin-top: 1rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--forge-line);
+  border-radius: var(--forge-radius);
+  background: rgba(255, 250, 242, 0.78);
+  box-shadow: var(--forge-shadow);
+  backdrop-filter: blur(8px);
+}
+
+.brand-mark {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.brand-mark__eyebrow,
+.site-hero__eyebrow,
+.section-eyebrow {
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--forge-accent);
+}
+
+.brand-mark__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--forge-ink);
+}
+
+.site-nav__link {
+  color: var(--forge-ink);
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  font-weight: 600;
+}
+
+.site-nav__toggle {
+  border-color: var(--forge-line);
+}
+
+.site-hero {
+  margin-top: 1rem;
+  padding: 2rem 0 0.5rem;
+}
+
+.site-hero__title {
+  max-width: 12ch;
+  margin: 0.5rem 0;
+  font-size: clamp(2.5rem, 5vw, 4.3rem);
+  line-height: 0.95;
+}
+
+.site-hero__text {
+  max-width: 42rem;
+  margin: 0;
+  color: var(--forge-muted);
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  font-size: 1.05rem;
+}
+
+.page-content {
+  padding-bottom: 3rem;
+}
+
+.page-section,
+.form-shell,
+.detail-shell,
+.encounter-card,
+.status-banner {
+  border: 1px solid var(--forge-line);
+  border-radius: var(--forge-radius);
+  background: var(--forge-surface);
+  box-shadow: var(--forge-shadow);
+}
+
+.page-section,
+.detail-shell {
+  padding: 1.5rem;
+}
+
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.page-title {
+  margin: 0.25rem 0 0;
+  font-size: clamp(2rem, 3vw, 2.75rem);
+}
+
+.page-intro {
+  max-width: 42rem;
+  margin: 0.5rem 0 0;
+  color: var(--forge-muted);
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+.app-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  padding: 0.8rem 1.2rem;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
+}
+
+.app-btn:hover {
+  transform: translateY(-1px);
+}
+
+.app-btn--accent {
+  background: var(--forge-accent);
+  border-color: var(--forge-accent);
+  color: #fff7f1;
+}
+
+.app-btn--accent:hover {
+  background: var(--forge-accent-dark);
+  border-color: var(--forge-accent-dark);
+  color: #fff7f1;
+}
+
+.app-btn--ghost {
+  background: transparent;
+  border-color: var(--forge-line);
+  color: var(--forge-ink);
+}
+
+.app-btn--danger {
+  background: #5f2417;
+  border-color: #5f2417;
+  color: #fff7f1;
+}
+
+.app-btn--sm {
+  padding: 0.55rem 0.9rem;
+  font-size: 0.92rem;
+}
+
+.status-stack {
+  display: grid;
+  gap: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.status-banner {
+  padding: 0.95rem 1rem;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+.status-banner--warning {
+  background: var(--forge-warning);
+}
+
+.status-banner--success {
+  background: var(--forge-success);
+}
+
+.encounter-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.encounter-card {
+  padding: 1.25rem;
+}
+
+.encounter-card__top,
+.detail-actions,
+.form-actions,
+.monster-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.encounter-card__title {
+  margin: 0;
+  font-size: 1.45rem;
+}
+
+.encounter-card__meta,
+.detail-subtitle,
+.support-copy,
+.monster-note,
+.site-footer__text,
+.empty-state__text,
+.form-hint {
+  color: var(--forge-muted);
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+.encounter-card__summary,
+.detail-grid,
+.monster-roster,
+.monster-blocks {
+  margin-top: 1rem;
+}
+
+.meta-chip,
+.stat-chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.35rem 0.75rem;
+  background: rgba(228, 191, 121, 0.2);
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--forge-accent-dark);
+}
+
+.meta-row,
+.stat-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.empty-state {
+  padding: 2rem;
+  text-align: center;
+}
+
+.empty-state__title {
+  margin-bottom: 0.5rem;
+}
+
+.form-shell {
+  padding: 1.5rem;
+}
+
+.form-section {
+  padding: 1.1rem;
+  border: 1px solid var(--forge-line);
+  border-radius: var(--forge-radius-sm);
+  background: var(--forge-card);
+}
+
+.form-section + .form-section {
+  margin-top: 1rem;
+}
+
+.form-section__title {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.form-section__header {
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  font-weight: 700;
+  color: var(--forge-ink);
+}
+
+.form-control,
+.form-select {
+  border-radius: 14px;
+  border: 1px solid rgba(82, 57, 40, 0.18);
+  padding: 0.8rem 0.9rem;
+  background: #fffdfa;
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus,
+.form-select:focus {
+  border-color: rgba(166, 71, 42, 0.45);
+  box-shadow: 0 0 0 0.2rem rgba(166, 71, 42, 0.12);
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.9rem;
+}
+
+.detail-card,
+.monster-entry {
+  padding: 1rem;
+  border: 1px solid var(--forge-line);
+  border-radius: var(--forge-radius-sm);
+  background: var(--forge-card);
+}
+
+.detail-card dt {
+  margin-bottom: 0.35rem;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--forge-accent);
+}
+
+.detail-card dd {
+  margin: 0;
+}
+
+.monster-roster {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 0 2rem;
+}
+
+.site-footer__title {
+  font-weight: 700;
+}
+
+.text-danger {
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+@media (max-width: 767.98px) {
+  .page-frame {
+    width: min(100% - 1.25rem, 1100px);
+  }
+
+  .site-header {
+    padding-top: 0.5rem;
+  }
+
+  .site-hero__title {
+    max-width: none;
+  }
+
+  .page-section,
+  .form-shell,
+  .detail-shell,
+  .encounter-card {
+    padding: 1.1rem;
+  }
+
+  .site-footer {
+    flex-direction: column;
+  }
 }

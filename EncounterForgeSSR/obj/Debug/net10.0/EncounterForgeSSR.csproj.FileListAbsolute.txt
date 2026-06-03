@@ -22,9 +22,7 @@ C:\Users\joshu\OneDrive\Desktop\Spring-2026\WDD430\Encounter\EncounterForgeSSR\o
 C:\Users\joshu\OneDrive\Desktop\Spring-2026\WDD430\Encounter\EncounterForgeSSR\obj\Debug\net10.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\joshu\OneDrive\Desktop\Spring-2026\WDD430\Encounter\EncounterForgeSSR\obj\Debug\net10.0\scopedcss\bundle\EncounterForgeSSR.styles.css
 C:\Users\joshu\OneDrive\Desktop\Spring-2026\WDD430\Encounter\EncounterForgeSSR\obj\Debug\net10.0\scopedcss\projectbundle\EncounterForgeSSR.bundle.scp.css
-C:\Users\joshu\OneDrive\Desktop\Spring-2026\WDD430\Encounter\EncounterForgeSSR\obj\Debug\net10.0\compressed\by3mlu19y2-{0}-b9sayid5wm-b9sayid5wm.gz
 C:\Users\joshu\OneDrive\Desktop\Spring-2026\WDD430\Encounter\EncounterForgeSSR\obj\Debug\net10.0\compressed\458zw0wqnf-{0}-61n19gt1b8-61n19gt1b8.gz
-C:\Users\joshu\OneDrive\Desktop\Spring-2026\WDD430\Encounter\EncounterForgeSSR\obj\Debug\net10.0\compressed\1i5g6ua270-{0}-xtxxf3hu2r-xtxxf3hu2r.gz
 C:\Users\joshu\OneDrive\Desktop\Spring-2026\WDD430\Encounter\EncounterForgeSSR\obj\Debug\net10.0\compressed\9r7aupy7x4-{0}-bqjiyaj88i-bqjiyaj88i.gz
 C:\Users\joshu\OneDrive\Desktop\Spring-2026\WDD430\Encounter\EncounterForgeSSR\obj\Debug\net10.0\compressed\jot7o8eceb-{0}-c2jlpeoesf-c2jlpeoesf.gz
 C:\Users\joshu\OneDrive\Desktop\Spring-2026\WDD430\Encounter\EncounterForgeSSR\obj\Debug\net10.0\compressed\ykm3ankga9-{0}-erw9l3u2r3-erw9l3u2r3.gz
@@ -270,3 +268,4 @@ C:\Users\joshu\OneDrive\Desktop\Spring-2026\WDD430\Encounter\EncounterForgeSSR\b
 C:\Users\joshu\OneDrive\Desktop\Spring-2026\WDD430\Encounter\EncounterForgeSSR\bin\Debug\net10.0\runtimes\win\lib\net9.0\System.Windows.Extensions.dll
 C:\Users\joshu\OneDrive\Desktop\Spring-2026\WDD430\Encounter\EncounterForgeSSR\obj\Debug\net10.0\EncounterForgeSSR.csproj.AssemblyReference.cache
 C:\Users\joshu\OneDrive\Desktop\Spring-2026\WDD430\Encounter\EncounterForgeSSR\obj\Debug\net10.0\Encounte.31D4C224.Up2Date
+C:\Users\joshu\OneDrive\Desktop\Spring-2026\WDD430\Encounter\EncounterForgeSSR\obj\Debug\net10.0\compressed\by3mlu19y2-{0}-sqh9zsgmuy-sqh9zsgmuy.gz
