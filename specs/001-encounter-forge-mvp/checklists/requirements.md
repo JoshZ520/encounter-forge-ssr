@@ -33,3 +33,10 @@
 
 - Validation iteration 1 completed with all checks passing.
 - No unresolved clarifications remain; ready for `/speckit.plan`.
+- 2026-06-03 milestone walkthrough completed (Milestones 1-5):
+  - Milestone 1: MVC routes and shared layout navigation validated on `/Encounters`.
+  - Milestone 2: SQLite + EF Core schema confirmed via startup migration logs and created DB.
+  - Milestone 3: Create/list/details flow validated with server-side and field-level validation.
+  - Milestone 4: Edit workflow validated; missing IDs for edit/details redirect to list with warning banner.
+  - Milestone 5: Delete workflow validated from list/details; success banner and empty-state behavior confirmed.
+  - Testing note: automated unit/integration tests remain deferred for this beginner-first pass.

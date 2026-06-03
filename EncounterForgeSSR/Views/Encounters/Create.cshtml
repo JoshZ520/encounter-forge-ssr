@@ -58,23 +58,32 @@
         <div class="mb-3">
             <label asp-for="MonsterEntries[0].Name" class="form-label">Monster Name</label>
             <input asp-for="MonsterEntries[0].Name" class="form-control" />
+            <span asp-validation-for="MonsterEntries[0].Name" class="text-danger"></span>
         </div>
         <div class="row g-3">
             <div class="col-md-6 mb-3">
                 <label asp-for="MonsterEntries[0].Quantity" class="form-label"></label>
                 <input asp-for="MonsterEntries[0].Quantity" class="form-control" />
+                <span asp-validation-for="MonsterEntries[0].Quantity" class="text-danger"></span>
             </div>
             <div class="col-md-6 mb-3">
                 <label asp-for="MonsterEntries[0].ChallengeRating" class="form-label"></label>
                 <input asp-for="MonsterEntries[0].ChallengeRating" class="form-control" />
+                <span asp-validation-for="MonsterEntries[0].ChallengeRating" class="text-danger"></span>
             </div>
         </div>
         <div class="mb-3">
             <label asp-for="MonsterEntries[0].Notes" class="form-label"></label>
             <textarea asp-for="MonsterEntries[0].Notes" class="form-control" rows="2"></textarea>
+            <span asp-validation-for="MonsterEntries[0].Notes" class="text-danger"></span>
         </div>
     </fieldset>
 
     <button type="submit" class="btn btn-primary">Save Encounter</button>
     <a class="btn btn-secondary" asp-action="Index">Cancel</a>
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

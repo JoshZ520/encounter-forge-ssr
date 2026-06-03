@@ -60,10 +60,10 @@
 
 ### Implementation for User Story 2
 
-- [ ] T015 [US2] Add Edit (GET/POST) actions with model binding and validation handling in EncounterForgeSSR/Controllers/EncountersController.cs
-- [ ] T016 [US2] Create edit Razor view for encounter fields and monster rows in EncounterForgeSSR/Views/Encounters/Edit.cshtml
-- [ ] T017 [US2] Implement missing-ID redirect with error banner for edit/details actions in EncounterForgeSSR/Controllers/EncountersController.cs
-- [ ] T018 [US2] Manually validate update workflow and missing-ID behavior using specs/001-encounter-forge-mvp/spec.md
+- [x] T015 [US2] Add Edit (GET/POST) actions with model binding and validation handling in EncounterForgeSSR/Controllers/EncountersController.cs
+- [x] T016 [US2] Create edit Razor view for encounter fields and monster rows in EncounterForgeSSR/Views/Encounters/Edit.cshtml
+- [x] T017 [US2] Implement missing-ID redirect with error banner for edit/details actions in EncounterForgeSSR/Controllers/EncountersController.cs
+- [x] T018 [US2] Manually validate update workflow and missing-ID behavior using specs/001-encounter-forge-mvp/spec.md
 
 **Checkpoint**: User Stories 1 and 2 both work independently
 
@@ -77,9 +77,9 @@
 
 ### Implementation for User Story 3
 
-- [ ] T019 [US3] Add delete POST action with success/error TempData banner behavior in EncounterForgeSSR/Controllers/EncountersController.cs
-- [ ] T020 [US3] Add delete form/button in EncounterForgeSSR/Views/Encounters/Details.cshtml and action links in EncounterForgeSSR/Views/Encounters/Index.cshtml
-- [ ] T021 [US3] Manually validate delete flow and not-found redirect behavior using specs/001-encounter-forge-mvp/spec.md
+- [x] T019 [US3] Add delete POST action with success/error TempData banner behavior in EncounterForgeSSR/Controllers/EncountersController.cs
+- [x] T020 [US3] Add delete form/button in EncounterForgeSSR/Views/Encounters/Details.cshtml and action links in EncounterForgeSSR/Views/Encounters/Index.cshtml
+- [x] T021 [US3] Manually validate delete flow and not-found redirect behavior using specs/001-encounter-forge-mvp/spec.md
 
 **Checkpoint**: All three user stories are functional and independently testable
 
@@ -89,8 +89,8 @@
 
 **Purpose**: Final consistency pass and learning wrap-up
 
-- [ ] T022 Review labels, validation messages, and banner wording for consistent UX across EncounterForgeSSR/Views/Encounters/\*.cshtml
-- [ ] T023 Run full milestone walkthrough from specs/001-encounter-forge-mvp/quickstart.md and record completion notes in specs/001-encounter-forge-mvp/checklists/requirements.md
+- [x] T022 Review labels, validation messages, and banner wording for consistent UX across EncounterForgeSSR/Views/Encounters/\*.cshtml
+- [x] T023 Run full milestone walkthrough from specs/001-encounter-forge-mvp/quickstart.md and record completion notes in specs/001-encounter-forge-mvp/checklists/requirements.md
 
 ---
 

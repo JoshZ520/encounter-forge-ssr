@@ -14,6 +14,11 @@
     <div class="alert alert-warning">@errorMessage</div>
 }
 
+@if (TempData["SuccessMessage"] is string successMessage)
+{
+    <div class="alert alert-success">@successMessage</div>
+}
+
 @if (!Model.Any())
 {
     <p class="text-muted">No encounters yet. Create your first one.</p>
@@ -23,13 +28,24 @@ else
     <div class="list-group">
         @foreach (var encounter in Model)
         {
-            <a class="list-group-item list-group-item-action" asp-action="Details" asp-route-id="@encounter.Id">
+            <div class="list-group-item">
                 <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">@encounter.Name</h5>
+                    <h5 class="mb-1">
+                        <a asp-action="Details" asp-route-id="@encounter.Id">@encounter.Name</a>
+                    </h5>
                     <small>Lvl @encounter.PartyLevel • Party of @encounter.PartySize</small>
                 </div>
                 <p class="mb-1">@encounter.Environment • @encounter.Difficulty</p>
-            </a>
+                <div class="btn-group btn-group-sm" role="group">
+                    <a class="btn btn-outline-primary" asp-action="Details" asp-route-id="@encounter.Id">View</a>
+                    <a class="btn btn-outline-secondary" asp-action="Edit" asp-route-id="@encounter.Id">Edit</a>
+                    <form asp-action="Delete" asp-route-id="@encounter.Id" method="post" class="d-inline">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-outline-danger"
+                                onclick="return confirm('Delete this encounter?');">Delete</button>
+                    </form>
+                </div>
+            </div>
         }
     </div>
 }
