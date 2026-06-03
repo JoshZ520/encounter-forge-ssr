@@ -38,6 +38,7 @@ public class EncountersController : Controller
     public async Task<IActionResult> Create(EncounterFormViewModel form)
     {
         await HydrateCatalogMonsterDataAsync(form.MonsterEntries);
+        ClearCatalogBoundValidationErrors(form.MonsterEntries);
 
         if (form.MonsterEntries.Count == 0)
         {
@@ -89,6 +90,7 @@ public class EncountersController : Controller
         }
 
         await HydrateCatalogMonsterDataAsync(form.MonsterEntries);
+        ClearCatalogBoundValidationErrors(form.MonsterEntries);
 
         if (form.MonsterEntries.Count == 0)
         {
@@ -277,6 +279,20 @@ public class EncountersController : Controller
             {
                 monster.Notes = catalogMonster.SuggestedNotes;
             }
+        }
+    }
+
+    private void ClearCatalogBoundValidationErrors(List<MonsterEntry> monsterEntries)
+    {
+        for (var i = 0; i < monsterEntries.Count; i++)
+        {
+            if (!monsterEntries[i].MonsterCatalogId.HasValue)
+            {
+                continue;
+            }
+
+            ModelState.Remove($"MonsterEntries[{i}].Name");
+            ModelState.Remove($"MonsterEntries[{i}].ChallengeRating");
         }
     }
 

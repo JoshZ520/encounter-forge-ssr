@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EncounterForgeSSR")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+428621fa39ceb4744c447eec418f36956c56387e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9e15a2e2ff652a0c33a24e0ddf3df8d132470450")]
 [assembly: System.Reflection.AssemblyProductAttribute("EncounterForgeSSR")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EncounterForgeSSR")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

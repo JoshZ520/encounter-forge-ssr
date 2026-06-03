@@ -95,7 +95,8 @@
 
                                     <div class="mb-3">
                                         <label asp-for="MonsterEntries[i].MonsterCatalogId" class="form-label">Monster Catalog</label>
-                                        <select asp-for="MonsterEntries[i].MonsterCatalogId" class="form-select" asp-items="ViewBag.MonsterCatalog">
+                                        <select asp-for="MonsterEntries[i].MonsterCatalogId" class="form-select"
+                                                asp-items="ViewBag.MonsterCatalog">
                                             <option value="">Custom monster...</option>
                                         </select>
                                         <p class="form-hint mb-0">Choose from catalog to auto-fill name and CR on save.</p>
