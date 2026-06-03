@@ -1,0 +1,35 @@
+@model IEnumerable<EncounterForgeSSR.Models.Encounter>
+
+@{
+    ViewData["Title"] = "Encounters";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h3 mb-0">Encounters</h1>
+    <a class="btn btn-primary" asp-action="Create">Create Encounter</a>
+</div>
+
+@if (TempData["ErrorMessage"] is string errorMessage)
+{
+    <div class="alert alert-warning">@errorMessage</div>
+}
+
+@if (!Model.Any())
+{
+    <p class="text-muted">No encounters yet. Create your first one.</p>
+}
+else
+{
+    <div class="list-group">
+        @foreach (var encounter in Model)
+        {
+            <a class="list-group-item list-group-item-action" asp-action="Details" asp-route-id="@encounter.Id">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">@encounter.Name</h5>
+                    <small>Lvl @encounter.PartyLevel • Party of @encounter.PartySize</small>
+                </div>
+                <p class="mb-1">@encounter.Environment • @encounter.Difficulty</p>
+            </a>
+        }
+    </div>
+}

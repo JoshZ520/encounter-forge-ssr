@@ -1,0 +1,80 @@
+@model EncounterFormViewModel
+
+@{
+    ViewData["Title"] = "Create Encounter";
+}
+
+<h1 class="h3 mb-3">Create Encounter</h1>
+
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-md-6 mb-3">
+            <label asp-for="PartyLevel" class="form-label"></label>
+            <input asp-for="PartyLevel" class="form-control" />
+            <span asp-validation-for="PartyLevel" class="text-danger"></span>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="PartySize" class="form-label"></label>
+            <input asp-for="PartySize" class="form-control" />
+            <span asp-validation-for="PartySize" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Environment" class="form-label"></label>
+        <input asp-for="Environment" class="form-control" />
+        <span asp-validation-for="Environment" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Difficulty" class="form-label"></label>
+        <select asp-for="Difficulty" class="form-select">
+            <option value="">Select difficulty</option>
+            <option>Easy</option>
+            <option>Medium</option>
+            <option>Hard</option>
+            <option>Deadly</option>
+        </select>
+        <span asp-validation-for="Difficulty" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Notes" class="form-label"></label>
+        <textarea asp-for="Notes" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="Notes" class="text-danger"></span>
+    </div>
+
+    <fieldset class="border rounded p-3 mb-3">
+        <legend class="float-none w-auto px-2 h6">Monster 1</legend>
+        <div class="mb-3">
+            <label asp-for="MonsterEntries[0].Name" class="form-label">Monster Name</label>
+            <input asp-for="MonsterEntries[0].Name" class="form-control" />
+        </div>
+        <div class="row g-3">
+            <div class="col-md-6 mb-3">
+                <label asp-for="MonsterEntries[0].Quantity" class="form-label"></label>
+                <input asp-for="MonsterEntries[0].Quantity" class="form-control" />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="MonsterEntries[0].ChallengeRating" class="form-label"></label>
+                <input asp-for="MonsterEntries[0].ChallengeRating" class="form-control" />
+            </div>
+        </div>
+        <div class="mb-3">
+            <label asp-for="MonsterEntries[0].Notes" class="form-label"></label>
+            <textarea asp-for="MonsterEntries[0].Notes" class="form-control" rows="2"></textarea>
+        </div>
+    </fieldset>
+
+    <button type="submit" class="btn btn-primary">Save Encounter</button>
+    <a class="btn btn-secondary" asp-action="Index">Cancel</a>
+</form>

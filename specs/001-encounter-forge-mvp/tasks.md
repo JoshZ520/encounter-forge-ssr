@@ -41,12 +41,12 @@
 
 ### Implementation for User Story 1
 
-- [ ] T009 [US1] Create Encounters controller skeleton with Index, Create (GET/POST), and Details actions in EncounterForgeSSR/Controllers/EncountersController.cs
-- [ ] T010 [P] [US1] Create encounter form view model for nested monster inputs in EncounterForgeSSR/ViewModels/EncounterFormViewModel.cs
-- [ ] T011 [US1] Build create form Razor view with validation summary and one monster input row in EncounterForgeSSR/Views/Encounters/Create.cshtml
-- [ ] T012 [US1] Build encounter list and details Razor views in EncounterForgeSSR/Views/Encounters/Index.cshtml and EncounterForgeSSR/Views/Encounters/Details.cshtml
-- [ ] T013 [US1] Create and apply initial EF migration in EncounterForgeSSR/Data/Migrations/ and verify SQLite file creation
-- [ ] T014 [US1] Manually validate create + details flow using criteria in specs/001-encounter-forge-mvp/quickstart.md
+- [x] T009 [US1] Create Encounters controller skeleton with Index, Create (GET/POST), and Details actions in EncounterForgeSSR/Controllers/EncountersController.cs
+- [x] T010 [P] [US1] Create encounter form view model for nested monster inputs in EncounterForgeSSR/ViewModels/EncounterFormViewModel.cs
+- [x] T011 [US1] Build create form Razor view with validation summary and one monster input row in EncounterForgeSSR/Views/Encounters/Create.cshtml
+- [x] T012 [US1] Build encounter list and details Razor views in EncounterForgeSSR/Views/Encounters/Index.cshtml and EncounterForgeSSR/Views/Encounters/Details.cshtml
+- [x] T013 [US1] Create and apply initial EF migration in EncounterForgeSSR/Data/Migrations/ and verify SQLite file creation
+- [x] T014 [US1] Manually validate create + details flow using criteria in specs/001-encounter-forge-mvp/quickstart.md
 
 **Checkpoint**: User Story 1 is functional and independently testable
 
